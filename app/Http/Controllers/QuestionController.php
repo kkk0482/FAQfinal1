@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Question;
 use Illuminate\Support\Facades\Auth;
+use App\Answer;
 
 class QuestionController extends Controller
 {
@@ -128,7 +129,22 @@ class QuestionController extends Controller
     public function destroy(Question $question)
     {
         $question->delete();
-        return redirect()->route('home')->with('message', 'Deleted');
+        return redirect()->route('home')->with('message', 'Your question has been deleted successfully!');
 
     }
+
+    public function actOnAnswer(Request $request, $id)
+    {
+        $action = $request->get('action');
+        switch ($action) {
+            case 'Like':
+                Answer::where('id', $id)->increment('likes_count');
+                break;
+            case 'Unlike':
+                Answer::where('id', $id)->decrement('likes_count');
+                break;
+        }
+        return '';
+    }
+
 }
