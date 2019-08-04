@@ -1,9 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Question;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+//use App\User;
 
 class HomeController extends Controller
 {
@@ -24,8 +25,12 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $user = Auth::user();
-        $questions = $user->questions()->paginate(6);
-        return view('home')->with('questions', $questions);
+        //$user = Auth::user();
+        //$user = Question::all();
+        //$questions = $user->questions()->paginate(6);
+        //return view('home')->with('questions', $questions);
+        $user = Question::all();
+        $x = \App\Question::paginate(12);
+        return view('home')->with('questions', $x);
     }
 }
