@@ -29,8 +29,11 @@ class HomeController extends Controller
         //$user = Question::all();
         //$questions = $user->questions()->paginate(6);
         //return view('home')->with('questions', $questions);
-        $user = Question::all();
-        $x = \App\Question::paginate(12);
-        return view('home')->with('questions', $x);
+        //$user = Question::all();
+        //$x = \App\Question::paginate(12);
+        //return view('home')->with('questions', $x);
+        $q = Question::all();
+        $questions = Question::paginate(6);
+        return view('home')->with('questions', $questions);
     }
 }
