@@ -75,7 +75,11 @@ class QuestionController extends Controller
      */
     public function show(Question $question)
     {
-        return view('question')->with('question', $question);
+        //return view('question')->with('question', $question);
+        $answers = $question->answers()
+            ->orderBy('created_at', 'asc')
+            ->get();
+        return view('question', ['answers' => $answers, 'question' => $question]);
     }
 
     /**
