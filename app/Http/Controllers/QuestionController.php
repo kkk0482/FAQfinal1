@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Question;
-use Illuminate\Support\Facades\Auth;
+//use Illuminate\Support\Facades\Auth;
 use App\Answer;
+use Illuminate\Support\Facades\Auth;
 use App\Events\AnswerAction;
 
 class QuestionController extends Controller
@@ -145,7 +146,8 @@ class QuestionController extends Controller
                 Answer::where('id', $id)->decrement('likes_count');
                 break;
         }
-        event(new AnswerAction($id, $action));
+        //event(new AnswerAction($id, $action));
+        broadcast(new AnswerAction($id, $action))->toOthers();
         return '';
     }
 
