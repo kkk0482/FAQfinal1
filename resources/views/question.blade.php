@@ -95,5 +95,12 @@
             axios.post('/answer/' + answerId + '/act',
                 { action: action });
         };
+
+        Echo.channel('answer-events')
+            .listen('AnswerAction', function (event) {
+                console.log(event);
+                var action = event.action;
+                updateAnswerStats[action](event.answerId);
+            })
     </script>
 @endsection
