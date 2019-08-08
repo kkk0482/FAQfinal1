@@ -70,6 +70,7 @@ class ProfileController extends Controller
         $user = Auth::user();
         $profile = $user->profile;
         return view('profile')->with('profile', $profile);
+
     }
 
     /**
@@ -124,5 +125,12 @@ class ProfileController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function showAnswer($id)
+    {
+        $user = Auth::user();
+        $questions = $user->questions()->paginate(6);
+        return view('home')->with('questions', $questions);
     }
 }
